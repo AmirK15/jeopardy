@@ -1,0 +1,23 @@
+body {
+  background: #0a1929;
+  //overflow-x: hidden;
+  color: white;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}

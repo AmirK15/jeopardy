@@ -1,0 +1,62 @@
+.table{
+  height: 100vh;
+  padding: 50px 30px;
+  &__content{
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  &__box{
+    padding: 15px 30px;
+    border: 3px solid rgba(255, 255, 255, 30%);
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.4375em;
+    letter-spacing: 0.00938em;
+  }
+  &__block{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  &__question{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    &__form{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      padding: 30px 40px;
+      background: #0a1929;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 15px;
+      .MuiInput-root{
+        &:before{
+          border-bottom: 1px solid rgba(255, 255, 255, 60%);
+        }
+      }
+      input {
+        color: white;
+      }
+      label{
+        color: rgba(255, 255, 255, 60%);
+      }
+      fieldset, fieldset:hover {
+        border-color: rgba(255, 255, 255, 60%);
+      }
+    }
+    &__title{
+      line-height: 30px;
+    }
+  }
+}

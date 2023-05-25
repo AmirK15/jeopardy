@@ -1,0 +1,25 @@
+.login {
+  height: 100vh;
+  position: relative;
+  &__form {
+    max-width: 25%;
+    width: 100%;
+    padding: 30px 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    input {
+      color: white;
+    }
+    label {
+      color: rgba(255, 255, 255, 60%);
+    }
+    fieldset, fieldset:hover {
+      border-color: rgba(255, 255, 255, 60%);
+    }
+  }
+}
