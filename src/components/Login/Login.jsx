@@ -29,8 +29,8 @@ const Login = () => {
     return (
         <div className="login">
             <form onSubmit={handleSubmit} className="login__form">
-                <TextField error={!validName} onChange={(e) => setName(e.target.value)} required label="User Name" variant="outlined" />
-                <Button type="submit" variant="outlined">Save</Button>
+                <TextField error={!validName} onChange={(e) => setName(e.target.value)} required label="User Name" variant="outlined"/>
+                <Button type="submit" size="large" variant="outlined">Save</Button>
             </form>
         </div>
     );

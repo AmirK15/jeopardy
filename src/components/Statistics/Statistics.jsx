@@ -16,27 +16,31 @@ const Statistics = () => {
                 <p className="statistics__name">Name: <span>{name}</span></p>
                 {allPlayers.length ?
                     allPlayers.map((item, idx) => (
-                    <ul key={idx} className="statistics__list">
-                        <li>
-                            Game: <span>{item.id}</span>
-                        </li>
-                        <li>
-                            Count answers: <span>{item.selectedQuestionId.length}</span>
-                        </li>
-                        <li>
-                            Right answers: <span>{item.rightAnswers.length}</span>
-                        </li>
-                        <li>
-                            Incorrect answer: <span>{item.incorrectAnswers.length}</span>
-                        </li>
-                        <li>
-                            Points: <span> {item.points}</span>
-                        </li>
-                    </ul>
-                )) : ''}
-                <Button className="statistics__btn" variant="contained" size="large" style={{marginTop: "15px"}}>
-                    <Link to="/game">Back</Link>
-                </Button>
+                        <ul key={idx} className="statistics__list">
+                            <li>
+                                Game: <span>{item.id}</span>
+                            </li>
+                            <li>
+                                Count answers: <span>{item.selectedQuestionId.length}</span>
+                            </li>
+                            <li>
+                                Right answers: <span>{item.rightAnswers.length}</span>
+                            </li>
+                            <li>
+                                Incorrect answer: <span>{item.incorrectAnswers.length}</span>
+                            </li>
+                            <li>
+                                Points: <span> {item.points}</span>
+                            </li>
+                        </ul>
+                    )) :
+                    <p className="statistics__name">no games played :(</p>
+                }
+                <Link to="/game">
+                    <Button className="statistics__btn" variant="contained" size="large" style={{marginTop: "15px"}}>
+                        Back
+                    </Button>
+                </Link>
             </div>
         </>
     );

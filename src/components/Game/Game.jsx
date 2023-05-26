@@ -7,7 +7,8 @@ import Button from '@mui/material/Button';
 import Table from "../Table/Table"
 
 import {logOut} from "../../features/users/usersSlice";
-import {clearStatistics} from "../../features/statistics/statisticsSlice";
+import {clearStatistics, addNewPlay} from "../../features/statistics/statisticsSlice";
+import {clearAllAnswers} from "../../features/users/usersSlice";
 
 import '../../styles/game.scss'
 
@@ -15,13 +16,22 @@ const Game = () => {
 
     const dispatch = useDispatch()
     const {data} = useSelector(({categories}) => categories)
-    const {name, selectedQuestionId} = useSelector(({users}) => users)
+    const {allPlayers} = useSelector(({statistics}) => statistics)
+    const {name, selectedQuestionId, points, rightAnswers, incorrectAnswers} = useSelector(({users}) => users)
 
     const [activeGame, setActiveGame] = useState(false)
 
     useEffect(() => {
         if (selectedQuestionId.length === (data.length * data[0].clues.length)) {
             setActiveGame(false)
+            dispatch(clearAllAnswers())
+            dispatch(addNewPlay({
+                id: allPlayers.length + 1,
+                points,
+                selectedQuestionId,
+                rightAnswers,
+                incorrectAnswers
+            }))
         }
     }, [selectedQuestionId])
 
@@ -33,7 +43,7 @@ const Game = () => {
                     <>
                         <h2 className="game__title">Hello {name}</h2>
                         <p className="game__desc">Welcome to Jeopardy Game</p>
-                        <div className="game__block">
+                        <nav className="game__navbar">
                             <Link to="/statistics">
                                 <Button variant="text" size="large">
                                     See Statistics
@@ -53,7 +63,7 @@ const Game = () => {
                                     Log Out
                                 </Button>
                             </Link>
-                        </div>
+                        </nav>
                     </>
             }
         </div>

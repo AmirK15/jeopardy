@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import {minusCountValue, plusCountValue, addRightAnswers, addIncorrectAnswers, addQuestionId} from "../../features/users/usersSlice";
 // import { plusValue, minusValue, addQuestion, addRight, addIncorrect } from "../../features/statistics/statisticsSlice";
 
-const Question = ({id, value, info, setQuestionInfo, questionInfo}) => {
+const Question = ({id, value, info, setQuestionInfo, questionInfo, notifySuc, notifyErr, notifyTime}) => {
 
     const dispatch = useDispatch()
     const {selectedQuestionId, rightAnswers, incorrectAnswers} = useSelector(({users}) => users)
@@ -16,7 +16,6 @@ const Question = ({id, value, info, setQuestionInfo, questionInfo}) => {
     const [timer, setTimer] = useState(60)
     const [intervalId, setIntervalId] = useState(null)
     const [timeoutId, setTimeoutIdId] = useState(null)
-
 
     const stopTimer = () => {
         if (intervalId && timeoutId) {
@@ -38,11 +37,12 @@ const Question = ({id, value, info, setQuestionInfo, questionInfo}) => {
             dispatch(minusCountValue(value))
             dispatch(addQuestionId(id))
             dispatch(addIncorrectAnswers(id))
+            setQuestionActive(false)
+            notifyTime()
             // for statistics
             // dispatch(minusValue(value))
             // dispatch(addQuestion())
             // dispatch(addIncorrect())
-            setQuestionActive(false)
         }, 60000)
         setTimeoutIdId(timeout)
     }
@@ -52,12 +52,14 @@ const Question = ({id, value, info, setQuestionInfo, questionInfo}) => {
         if (e.target[0].value.toLowerCase() === questionInfo.answer.replace(/[^a-zа-яё0-9\s]/gi, '').toLowerCase()) {
             dispatch(plusCountValue(questionInfo.value))
             dispatch(addRightAnswers(id))
+            notifySuc()
             // for statistics
             // dispatch(plusValue(questionInfo.value))
             // dispatch(addRight())
         } else {
             dispatch(minusCountValue(questionInfo.value))
             dispatch(addIncorrectAnswers(id))
+            notifyErr()
             // for statistics
             // dispatch(minusValue(questionInfo.value))
             // dispatch(addIncorrect())

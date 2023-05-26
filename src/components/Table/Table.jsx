@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from "react-redux"
+
 import Button from "@mui/material/Button";
+
+import toast, { Toaster } from 'react-hot-toast';
 
 import Question from "../Question/Question";
 
@@ -17,12 +20,17 @@ const Table = ({setActiveGame}) => {
     const {points, selectedQuestionId, rightAnswers, incorrectAnswers} = useSelector(({users}) => users)
 
     const [questionInfo, setQuestionInfo] = useState({})
-    console.log(points)
-    console.log(selectedQuestionId)
-    console.log(rightAnswers)
-    console.log(incorrectAnswers)
+
+    const notifySuc = () => toast.success('The answer is correct');
+    const notifyErr = () => toast.error('The answer is incorrect');
+    const notifyTime = () => toast.error('Time\'s up');
+
     return (
         <div className="table">
+            <Toaster
+                position="top-center"
+                // reverseOrder={true}
+            />
             <table className="table__content">
                 <tbody>
                 {data.map(item => (
@@ -30,7 +38,16 @@ const Table = ({setActiveGame}) => {
                         <td className="table__box">{item.title}</td>
                         {item.clues.map(el => (
                             <td key={el.id} className="table__box">
-                                <Question id={el.id} value={el.value} info={el} setQuestionInfo={setQuestionInfo} questionInfo={questionInfo}/>
+                                <Question
+                                    id={el.id}
+                                    value={el.value}
+                                    info={el}
+                                    setQuestionInfo={setQuestionInfo}
+                                    questionInfo={questionInfo}
+                                    notifySuc={notifySuc}
+                                    notifyErr={notifyErr}
+                                    notifyTime={notifyTime}
+                                />
                             </td>
                         ))}
                     </tr>
